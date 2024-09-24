@@ -1,0 +1,121 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.modalOverlay {
+  align-items: center;
+  background: var(--semi-color-fill-0);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  height: 900px;    /*  这里是调整长宽高的地方 */
+  width: 1800px; 
+  overflow: hidden;
+  padding: 0px;
+  flex-shrink: 0;
+  color: var(--semi-color-disabled-text);
+  font-size: 14px;
+  letter-spacing: -0.14px;
+  line-height: 20px;
+}
+
+/* .modalContent {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+} */
+.right {
+  align-items: flex-start;
+  display: flex;
+  flex-basis: 0;
+  flex-direction: column;
+  padding: 5px 0px 0px 5px;
+  row-gap: 10px;
+  flex-grow: 1;
+}
+
+
+
+.buttonsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px; /* 可选：设置按钮之间的间距 */
+}
+
+
+
+.modalOverlay2 {
+  background: var(--semi-color-fill-0);
+  border-radius: 12px;
+  height: 900px;
+  width: 100%; /* 确保 iframe 占据 container3 的全部宽度 */
+  overflow: hidden;
+  padding: 0px;
+  flex-shrink: 0;
+  color: var(--semi-color-disabled-text);
+  font-size: 14px;
+  letter-spacing: -0.14px;
+  line-height: 20px;
+}
+
+.container2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 16px;
+  height: 100vh;
+}
+
+.container3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 中间对齐 */
+  gap: 16px;
+  width: calc(50% - 8px); /* 确保每个 container3 占据父容器的一半宽度并留出间距 */
+}
+
+.container4 {
+  display: flex;
+  justify-content: center; /* 中间对齐 */
+  width: 100%; /* 确保 container4 占满父容器的宽度 */
+}
