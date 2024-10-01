@@ -37,7 +37,7 @@ export default function NavApp() {
 
     const getDefalutNavList = async () => {  //获取后端返回的数据
         try {
-            const response = await axios.get("https://94eoau696923.vicp.fun/kingsoft_nav_config", {     //这里传递了后端系统的相关数据
+            const response = await axios.get("http://127.0.0.1:5000/kingsoft_nav_config", {     //这里传递了后端系统的相关数据
                 responseType: 'json', // 指定响应的数据类型为 JSON 格式
             });
             // console.log('这是响应的数据', response.data.data.result.视图链接);

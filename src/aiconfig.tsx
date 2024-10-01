@@ -94,7 +94,7 @@ const ModalOut: React.FC<{ setOpenForm: React.Dispatch<React.SetStateAction<bool
       const run = String(formValues.run);
       const modal = String(formValues.modal);
       const response = await axios.post(
-        'https://94eoau696923.vicp.fun/addAiMission',
+        'http://127.0.0.1:5000/addAiMission',
         JSON.stringify({ autoReply, missionName, customComplaim, botReply, watchChannel, chooseRagDataSet, run, modal }),
         {
           headers: {
@@ -182,7 +182,7 @@ const ShowMissonTable = ({ getAiConfig, missionInfo }) => {
 };
 
 const ShowQandA = ({ clickQUrl, clickAUrl }) => {
-  const ENDPOINT = "https://94eoau696923.vicp.fun";
+  const ENDPOINT = "http://127.0.0.1:5000";
   const [message, setMessage] = useState("");
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
@@ -246,7 +246,7 @@ const Aiconfig = () => {
 
   const getAiConfig = useCallback(async () => {
     try {
-      const response = await axios.get("https://94eoau696923.vicp.fun/aiConfig", {
+      const response = await axios.get("http://127.0.0.1:5000/aiConfig", {
         responseType: 'json'
       });
       console.log("response.data", response.data)

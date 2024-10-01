@@ -25,7 +25,7 @@ const Component = () => {  //
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('https://94eoau696923.vicp.fun/login', { username, password });
+      const response = await axios.post('http://127.0.0.1:5000/login', { username, password });
       if (response.data.message === 'Login successful') {
         console.log('Login successful');
         // localStorage.setItem('isAuthenticated', 'true'); //在web浏览器中保存登录状态

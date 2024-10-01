@@ -70,7 +70,7 @@ const deleteAiConfig = async ({ Name }) => {   //删除Ai配置
   try {
     const missionName = String(Name); // 将项目名称进行 URL 编码
     const response = await axios.post(
-      'https://94eoau696923.vicp.fun/deleteaiconfig',
+      'http://127.0.0.1:5000/deleteaiconfig',
       JSON.stringify({ missionName }),
       {
         headers: {

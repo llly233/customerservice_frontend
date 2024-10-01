@@ -22,7 +22,7 @@ const HandleItemChange = ({ itemRef, i, values }) => {
     const oldItemName = String(focusItemValue);
     try {
       const response = await axios.post(
-        'https://94eoau696923.vicp.fun/changeItem',
+        'http://127.0.0.1:5000/changeItem',
         JSON.stringify({ itemName, oldItemName }),
         {
           headers: {
@@ -101,7 +101,7 @@ const HandleElementChange = ({ elementRef, values, i, num }) => {
     const oldElementName = String(focusElementValue);
     try {
       const response = await axios.post(
-        'https://94eoau696923.vicp.fun/changeElement',
+        'http://127.0.0.1:5000/changeElement',
         JSON.stringify({ itemName, elementName, oldElementName }),
         {
           headers: {
@@ -179,7 +179,7 @@ const HandleLinkChange = ({ linkRef, values, num, i }) => {
     const newLinkValue = String(newLink)
     try {  //尝试直接使用webhook进行触发
       const response = await axios.post(
-        'https://94eoau696923.vicp.fun/changeLink',
+        'http://127.0.0.1:5000/changeLink',
         JSON.stringify({ itemName, elementName, oldLinkValue, newLinkValue }),
         {
           headers: {
@@ -331,7 +331,7 @@ const NestArrayFieldDemo = ({ updateItems, nav_to_link, updateModalLink }) => {
   const addItem = useCallback(async () => {
     console.log('正在新增项目');
     try {
-      const response = await axios.get('https://94eoau696923.vicp.fun/addItem');
+      const response = await axios.get('http://127.0.0.1:5000/addItem');
       if (response.status === 200) {
         console.log(response);
         Toast.success({ content: 'nav-1 add success', duration: 3, theme: 'light' });  //保存成功进行提示
@@ -354,7 +354,7 @@ const NestArrayFieldDemo = ({ updateItems, nav_to_link, updateModalLink }) => {
     try {
       const itemName = String(text); // 将项目名称进行 URL 编码
       const response = await axios.post(
-        'https://94eoau696923.vicp.fun/deleteItem',
+        'http://127.0.0.1:5000/deleteItem',
         JSON.stringify({ itemName }),
         {
           headers: {
@@ -380,7 +380,7 @@ const NestArrayFieldDemo = ({ updateItems, nav_to_link, updateModalLink }) => {
       const itemName = String(text);
       const elementName = String(itemName);
       const response = await axios.post(
-        'https://94eoau696923.vicp.fun/addElement',
+        'http://127.0.0.1:5000/addElement',
         JSON.stringify({ itemName, elementName }),
         {
           headers: {
@@ -407,7 +407,7 @@ const NestArrayFieldDemo = ({ updateItems, nav_to_link, updateModalLink }) => {
     const elementName = String(eleName);
     try {
       const response = await axios.post(
-        'https://94eoau696923.vicp.fun/deleteElement',
+        'http://127.0.0.1:5000/deleteElement',
         JSON.stringify({ itemName, elementName }),
         {
           headers: {
