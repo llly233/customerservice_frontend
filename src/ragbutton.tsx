@@ -10,7 +10,7 @@ const ButtonDemo = () => {
 
     const saveRagKnowledge = async () => {
         try {
-            const response = await axios.get('https://94eoau696923.vicp.fun/save_rag_knowledge');
+            const response = await axios.get('http://127.0.0.1:5000/save_rag_knowledge');
             console.log(response)
             if (response.status === 200) {
                 console.log(response);

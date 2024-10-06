@@ -157,29 +157,50 @@ const MissionList: React.FC<{ isOpenForm: boolean; setOpenForm: React.Dispatch<R
 }
 
 
+
+/**
+ * ShowMissonTable 组件用于展示任务配置表格。
+ * @param {Function} getAiConfig - 用于获取AI配置信息的函数。
+ * @param {Object} missionInfo - 包含任务信息的对象。
+ */
 const ShowMissonTable = ({ getAiConfig, missionInfo }) => {
+  // 定义状态，用于存储任务表格数据
   const [missionTable, setMissionTable] = useState([]);
+  // 定义状态，用于控制表单的显示与隐藏
   const [isOpenForm, setOpenForm] = useState(false);
 
-
+  // 副作用效应，用于在组件加载时获取AI配置
   useEffect(() => {
+    // 调用 getAiConfig 函数
     getAiConfig();
-  }, [getAiConfig]);
+  }, [getAiConfig]); // 依赖列表，当 getAiConfig 改变时重新执行
 
+  // 副作用效应，用于在任务信息更新时更新任务表格数据
   useEffect(() => {
-    const missonInfo2 = missionInfo.data
-    console.log(missonInfo2)
-    if (missonInfo2) { setMissionTable(missonInfo2.result.ai助手配置) }
-  }, [missionInfo]);
+    // 从 missionInfo 中解构出任务数据
+    const missonInfo2 = missionInfo.data;
+    console.log(missonInfo2); // 打印任务数据，用于调试
+    // 如果任务数据存在，则更新任务表格状态
+    if (missonInfo2) { 
+      setMissionTable(missonInfo2.result.ai助手配置); 
+    }
+  }, [missionInfo]); // 依赖列表，当 missionInfo 改变时重新执行
 
+  // 渲染组件
   return (
     <div>
+      {/* 按钮用于打开添加任务的模态框 */}
       <Button onClick={() => setOpenForm(true)}>Add Mission</Button>
+      {/* 条件渲染模态框，当 isOpenForm 为 true 时显示 */}
       {isOpenForm ? <ModalOut setOpenForm={setOpenForm} /> : null}
-      {missionTable != null || missionTable != undefined ? <MissionTable missionTable={missionTable} /> : <MissionList isOpenForm={isOpenForm} setOpenForm={setOpenForm} />}
+      {/* 条件渲染任务表格或任务列表 */}
+      {missionTable != null || missionTable != undefined ? 
+        <MissionTable missionTable={missionTable} /> : 
+        <MissionList isOpenForm={isOpenForm} setOpenForm={setOpenForm} />} 
     </div>
   );
 };
+
 
 const ShowQandA = ({ clickQUrl, clickAUrl }) => {
   const ENDPOINT = "http://127.0.0.1:5000";

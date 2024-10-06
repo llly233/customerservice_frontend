@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { Space, Table } from 'antd';
+import React, { useMemo, useState ,useEffect} from 'react';
+import { Space, Table, Switch } from 'antd';
 import type { TableProps } from 'antd';
 import axios from 'axios';
 import { Toast } from '@douyinfe/semi-ui';
@@ -59,8 +59,9 @@ const columns: TableProps<DataType>['columns'] = [
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
-        {record.run === 'true' ? "open" : "pause"}
-        <a onClick={() => deleteAiConfig(record.name)}>Delete</a>
+        {/* {record.run === 'true' ? "open" : "pause"} */}
+        <RunSwitch initStatus={record.run == "true"? Boolean(true):Boolean(false) } missionName={record.name}/> {/** 加入任务开关按钮 */}
+        <a onClick={() =>{deleteAiConfig({ Name: record.name })} }>Delete</a>
       </Space>
     ),
   },
@@ -68,10 +69,10 @@ const columns: TableProps<DataType>['columns'] = [
 const deleteAiConfig = async ({ Name }) => {   //删除Ai配置
   console.log('正在删除项目', Name);
   try {
-    const missionName = String(Name); // 将项目名称进行 URL 编码
+    const missionName = String(Name); 
     const response = await axios.post(
       'http://127.0.0.1:5000/deleteaiconfig',
-      JSON.stringify({ missionName }),
+      { missionName },
       {
         headers: {
           'Content-Type': 'application/json; charset=utf-8' // 指定请求头的 Content-Type 和字符集为 UTF-8
@@ -109,6 +110,62 @@ const MissionTable: React.FC = ({ missionTable }) => {
 
 
   return <Table columns={columns} dataSource={data} />;
+};
+
+/**
+ * 机器人开关的按钮
+ * @param initStatus-用来界定一开始传进来的值
+ * @returns 
+ */
+
+const RunSwitch = ({ initStatus, missionName }) => {
+  const [checked, setChecked] = useState(false); // 默认初始值为 false
+
+  useEffect(() => {
+    // 当 initStatus 改变时，更新 checked 状态
+    if (typeof initStatus !== 'undefined') {
+      setChecked(initStatus); // 确保转换为布尔值
+    }
+  }, [initStatus]); // 依赖列表，只有 initStatus 改变时才执行
+
+  const onChange = async (newChecked) => {
+    setChecked(newChecked);
+    console.log('正在变更项目运行状态', newChecked);
+
+    try {
+      const missionNameStr = String(missionName);
+      const runStatusStr = String(newChecked);
+      const response = await axios.post(
+        'http://127.0.0.1:5000/changeMissionIsRun', 
+        { missionName: missionNameStr, runStatus: runStatusStr },
+        {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+          }
+        }
+      );
+      console.log(response.data);
+      if (response.status === 200) {
+        Toast.success({
+          content: `${runStatusStr === "true" ? "正在启动" : "正在关闭"} ${missionNameStr} 任务`,
+          duration: 3,
+          theme: 'light'
+        });
+      }
+    } catch (error) {
+      console.error('failed:', error);
+      Toast.error({ content: '状态变更失败,请联系管理员', duration: 3, theme: 'light' });
+    }
+  };
+
+  return (
+    <Switch
+      checkedChildren="开启"
+      unCheckedChildren="关闭"
+      checked={checked}
+      onChange={onChange}
+    />
+  );
 };
 
 export default MissionTable;
