@@ -144,6 +144,15 @@ const RunSwitch = ({ initStatus, missionName }) => {
           }
         }
       );
+      const response_bot = await axios.post(
+        'http://127.0.0.1:5000/operate_bot', 
+        { missionName: missionNameStr, runStatus: runStatusStr },
+        {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+          }
+        }
+      );
       console.log(response.data);
       if (response.status === 200) {
         Toast.success({
@@ -152,10 +161,20 @@ const RunSwitch = ({ initStatus, missionName }) => {
           theme: 'light'
         });
       }
+      if(response_bot ===200){
+        Toast.success({
+          content: `${runStatusStr === "true" ? "正在启动" : "正在关闭"} ${missionNameStr} 机器人`,
+          duration: 5,
+          theme: 'light'
+        });
+      }
     } catch (error) {
       console.error('failed:', error);
       Toast.error({ content: '状态变更失败,请联系管理员', duration: 3, theme: 'light' });
     }
+
+  
+
   };
 
   return (
