@@ -201,7 +201,7 @@ export default function NavApp() {
                             items={items}
                             header={{
                                 logo: <IconSemiLogo style={{ height: '36px', fontSize: 36 }} />,
-                                text: 'Product Rag KB ',
+                                text: 'Configuration ',
                             }}
                             footer={{
                                 collapseButton: true,
@@ -249,7 +249,7 @@ export default function NavApp() {
                                         >AI Config</Button>
                                     </NavLink>
                                     <Avatar color="orange" size="small">
-                                        YJ
+                                        YTZ
                                     </Avatar>
                                 </>
                             }

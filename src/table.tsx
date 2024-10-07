@@ -1,5 +1,5 @@
 import React, { useMemo, useState ,useEffect} from 'react';
-import { Space, Table, Switch } from 'antd';
+import { Space, Table, Switch,Select } from 'antd';
 import type { TableProps } from 'antd';
 import axios from 'axios';
 import { Toast } from '@douyinfe/semi-ui';
@@ -35,8 +35,9 @@ const columns: TableProps<DataType>['columns'] = [
   },
   {
     title: 'RAG Dataset',
-    dataIndex: 'rag',
-    key: 'rag',
+    render: () => (
+      <SelectDB/>
+    ),
   },
   {
     title: 'Customer Complain Record',
@@ -186,5 +187,27 @@ const RunSwitch = ({ initStatus, missionName }) => {
     />
   );
 };
+/**
+ * 选择知识库的按钮,暂时仍处于开发中
+ */
+
+const SelectDB = ()=>{
+  return(
+    <Space wrap>
+    <Select
+      defaultValue="Digit Store"
+      style={{ width: 180 }}
+      // onChange={handleChange}
+      options={[
+        { value: 'Digit Store', label: 'Digit Store' },
+        { value: 'Clothing store', label: 'Clothing store' },
+        { value: 'Manufacturing suppliers', label: 'Manufacturing suppliers' },
+      ]}
+    />
+  </Space>
+  )
+
+}
+
 
 export default MissionTable;
